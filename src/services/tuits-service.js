@@ -1,7 +1,7 @@
 import axios from "axios";
-const BASE_URL = "http://my-node-express-project-env.eba-hxq4pgvm.us-east-1.elasticbeanstalk.com"
-const TUITS_API = `${BASE_URL}/api/tuits`;
-const USERS_API = `${BASE_URL}/api/users`;
+const BASE_URL = "https://shash-tuiter.herokuapp.com/api";
+const TUITS_API = `${BASE_URL}/tuits`;
+const USERS_API = `${BASE_URL}/users`;
 
 export const findAllTuits = () =>
   axios.get(TUITS_API)
