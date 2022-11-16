@@ -1,7 +1,6 @@
 import axios from "axios";
 const BASE_URL =
-  process.env.REACT_APP_TUIT_SERVICE_URL ||
-  "https://shash-tuiter.herokuapp.com/api";
+  process.env.REACT_APP_TUIT_SERVICE_URL || "https://tuiter.onrender.com/api";
 
 
 const LOGIN_API = `${BASE_URL}/login`;
