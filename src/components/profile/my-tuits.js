@@ -12,7 +12,9 @@ const MyTuits = () => {
 
   const deleteTuit = (tid) => service.deleteTuit(tid).then(findMyTuits);
 
-  return <Tuits tuits={tuits} deleteTuit={deleteTuit} />;
+  return (
+    <Tuits tuits={tuits} deleteTuit={deleteTuit} refreshTuits={findMyTuits} />
+  );
 };
 
 export default MyTuits;
