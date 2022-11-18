@@ -13,8 +13,6 @@ export const Login = () => {
   const [loginUser, setLoginUser] = useState({});
   const navigate = useNavigate();
 
-  // const navigate = useNavigate()
-
   const uuu = [
     {
       username: "ellen_ripley",
@@ -31,19 +29,27 @@ export const Login = () => {
   ];
 
   const deleteUser = (uid) => service.deleteUser(uid).then(findAllUsers);
+
   const findAllUsers = () =>
     service.findAllUsers().then((users) => {
       setExistingUsers(users);
     });
+
   const register = () =>
     authService
       .signup(newUser)
       .then(() => navigate("/profile"))
       .catch((e) => alert(e));
-  const login = () =>
-    service.findUserByCredentials(loginUser).then((user) => {
-      //navigate(`/home/${user._id}`)
-    });
+
+  const login = () => {
+    if (!loginUser?.username || !loginUser.password) return;
+
+    authService
+      .login(loginUser?.username, loginUser?.password)
+      .then(() => navigate("/profile"));
+  };
+
+
   useEffect(findAllUsers, []);
   return (
     <div>

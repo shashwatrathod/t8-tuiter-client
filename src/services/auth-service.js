@@ -9,3 +9,14 @@ const api = axios.create({
 
 export const signup = (user) =>
   api.post(`${AUTH_API}/signup`, user).then((response) => response.data);
+
+export const profile = () =>
+  api.get(`${AUTH_API}`).then((response) => response.data);
+
+export const login = (username, password) =>
+  api
+    .post(`${AUTH_API}/login`, { username, password })
+    .then((response) => response.data);
+
+export const logout = () =>
+  api.delete(`${AUTH_API}`).then((response) => response.data);
