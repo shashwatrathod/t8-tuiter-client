@@ -38,7 +38,7 @@ const TuitStats = ({ likeTuit, tuit, dislikeTuit }) => {
             "ttr-like-unlike-color-red": likedTuit,
           })}
         ></i>
-        {tuit.stats && tuit.stats.likes}
+        {tuit.stats?.likes}
       </div>
       <div className="col" onClick={() => dislikeTuit(tuit)}>
         <i
@@ -46,7 +46,7 @@ const TuitStats = ({ likeTuit, tuit, dislikeTuit }) => {
             "ttr-like-unlike-color-red": dislikedTuit,
           })}
         ></i>
-        {tuit.stats && tuit.stats.dislikes}
+        {tuit.stats?.dislikes}
       </div>
     </div>
   );
