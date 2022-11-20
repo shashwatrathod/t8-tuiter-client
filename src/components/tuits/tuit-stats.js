@@ -4,18 +4,18 @@ import * as dislikesService from "../../services/dislikes-service";
 import clsx from "clsx";
 
 const TuitStats = ({ likeTuit, tuit, dislikeTuit }) => {
-  const [hasLikedTuit, sethasLikedTuit] = useState(false);
-  const [hasDislikedTuit, sethasDislikedTuit] = useState(false);
+  const [likedTuit, setLikedTuit] = useState(false);
+  const [dislikedTuit, setDislikedTuit] = useState(false);
 
   useEffect(() => {
     const fetchLikesDislikes = () => {
       likesService.hasUserLikedTheTuit("me", tuit._id).then((liked) => {
-        sethasLikedTuit(liked);
+        setLikedTuit(liked);
       });
       dislikesService
         .hasUserDislikedTheTuit("me", tuit._id)
         .then((disliked) => {
-          sethasDislikedTuit(disliked);
+          setDislikedTuit(disliked);
         });
     };
 
@@ -35,7 +35,7 @@ const TuitStats = ({ likeTuit, tuit, dislikeTuit }) => {
       <div className="col" onClick={() => likeTuit(tuit)}>
         <i
           className={clsx("fa-solid", "fa-thumbs-up", "me-1", {
-            "ttr-like-unlike-color-red": hasLikedTuit,
+            "ttr-like-unlike-color-red": likedTuit,
           })}
         ></i>
         {tuit.stats && tuit.stats.likes}
@@ -43,7 +43,7 @@ const TuitStats = ({ likeTuit, tuit, dislikeTuit }) => {
       <div className="col" onClick={() => dislikeTuit(tuit)}>
         <i
           className={clsx("fa-solid", "fa-thumbs-down", "me-1", {
-            "ttr-like-unlike-color-red": hasDislikedTuit,
+            "ttr-like-unlike-color-red": dislikedTuit,
           })}
         ></i>
         {tuit.stats && tuit.stats.dislikes}
