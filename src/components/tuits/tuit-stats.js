@@ -22,6 +22,10 @@ export default class TuitStats extends React.Component {
         <div className="col">
           <i className="far fa-inbox-out"></i>
         </div>
+        <div className="col">
+        <i className="far fa-edit"></i>
+        {this.props.tuit.stats && this.props.tuit.stats.edits}
+        </div>
       </div>
     );
   }
