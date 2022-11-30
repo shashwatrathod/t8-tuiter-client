@@ -26,3 +26,9 @@ export const updateTuit = (tid, tuit) =>
 
 export const deleteTuit = (tid) =>
   api.delete(`${TUITS_API}/${tid}`).then((response) => response.data);
+
+export const editTuit = (tid, tuit) => {
+  // TODO: call the api;
+
+  return true; // TODO: Modify later to return response from API
+};
