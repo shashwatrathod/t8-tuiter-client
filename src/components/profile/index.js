@@ -64,6 +64,11 @@ const Profile = () => {
                     className="nav-link">
                 Likes</Link>
             </li>
+             <li className="nav-item">
+               <Link to="/profile/mentions"
+                     className="nav-link">
+                 User Mentions</Link>
+             </li>
           </ul>
         </div>
       </div>
