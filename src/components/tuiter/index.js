@@ -43,6 +43,7 @@ function Tuiter() {
               <Route path="/profile/tuits" element={<MyTuits />} />
               <Route path="/profile/edit" element={<EditProfile />} />
               <Route path="/movies" element={<Movies />} />
+              <Route path="/profile/mentions" element={<UserMentions/>}/>
               <Route path="/movies/:imdbID" element={<MovieDetails />} />
               <Route path="/more" element={<More />} />
             </Routes>
