@@ -17,6 +17,7 @@ import {Login} from "../profile/login";
 import Movies from "../movies";
 import MovieDetails from "../movies/details";
 import MyTuits from "../profile/my-tuits";
+import TuitVersions from "../tuits/tuit-versions";
 
 function Tuiter() {
   return (
@@ -44,6 +45,7 @@ function Tuiter() {
               <Route path="/profile/edit" element={<EditProfile />} />
               <Route path="/movies" element={<Movies />} />
               <Route path="/movies/:imdbID" element={<MovieDetails />} />
+              <Route path="/tuitVersion" element={<TuitVersions/>}/>
               <Route path="/more" element={<More />} />
             </Routes>
           </div>
