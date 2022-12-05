@@ -41,11 +41,12 @@ function Tuiter() {
               <Route path="/bookmarks" element={<Bookmarks />} />
               <Route path="/lists" element={<Lists />} />
               <Route path="/profile" element={<Profile />} />
-              <Route path="/profile/tuits" element={<MyTuits />} />
+              <Route path="/profile/tuits/*" element={<MyTuits />} />
               <Route path="/profile/edit" element={<EditProfile />} />
               <Route path="/movies" element={<Movies />} />
               <Route path="/movies/:imdbID" element={<MovieDetails />} />
-              <Route path="/tuitVersion" element={<TuitVersions/>}/>
+              <Route path="/tuits/:tid/versions" element={<TuitVersions/>} />
+       
               <Route path="/more" element={<More />} />
             </Routes>
           </div>
