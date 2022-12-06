@@ -28,5 +28,5 @@ export const updateTuit = (tid, tuit) =>
 export const deleteTuit = (tid) =>
   api.delete(`${TUITS_API}/${tid}`).then((response) => response.data);
 
-export const checkVersions = (tid) =>
+export const getVersions = (tid) =>
 api.get(`${TUITS_API}/${tid}/versions`).then((response) => response.data);

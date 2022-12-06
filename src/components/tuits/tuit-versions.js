@@ -1,27 +1,36 @@
-import Tuit from "../tuits";
+import Tuits from "../tuits";
 import * as service from "../../services/tuits-service";
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 
-const TuitVersions = () => {
+const TuitVersions = ({tuit}) => {
   const [allVersions, getAllVersions] = useState([]);
   const {tid} = useParams();
-  const findTuitVersions = () =>{
-    console.log(tid,"in findTuitVersions on tuit-versions.js")
-    console.log(service.checkVersions(tid)
-      .then((tuits) => getAllVersions(tuits))
-      .catch((e) => alert(e)));
+  const findTuitVersions = async () =>{
+    const versions = await service.getVersions(tid)//.then((tuits) => getAllVersions(tuits));
+    return versions
   }
+  findTuitVersions().then((res)=>console.log(res));
+  
   useEffect(findTuitVersions, []);
+
+//   useEffect(() => {
+//     async function findTuitVersions() {
+//       // You can await here
+//       const response = await service.getVersions(tid)
+//       // ...
+//     }
+//     findTuitVersions();
+//   }, []); // Or []
   
   return(
     <div>
       <div>
         <h1>Tuit Versions</h1> 
       </div>
-      <Tuit 
-            allVersions={allVersions}
-            refreshTuits={findTuitVersions}/>
+      {/* <Tuits 
+            tuits={allVersions}
+            refreshTuits={findTuitVersions}/> */}
              <div>
         {/* <ul className="ttr-tuits list-group">
         {tuit.map &&

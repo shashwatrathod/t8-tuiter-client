@@ -5,11 +5,10 @@ import TuitVideo from "./tuit-video";
 import TuitVersions from "./tuit-versions";
 import {HashRouter, Link, Route, Routes, useNavigate, useLocation, useParams} from "react-router-dom";
 
-const Tuit = ({ tuit, deleteTuit, likeTuit, dislikeTuit, checkVersions }) => {
+const Tuit = ({ tuit, deleteTuit, likeTuit, dislikeTuit}) => {
   const navigate = useNavigate();
   const tuit_id = tuit._id
   const handleClick = () => {
-    console.log(tuit_id)
     navigate(`/tuits/${tuit_id}/versions`)};
   return (
     <li className="p-2 ttr-tuit list-group-item d-flex rounded-0">
@@ -31,8 +30,8 @@ const Tuit = ({ tuit, deleteTuit, likeTuit, dislikeTuit, checkVersions }) => {
           
           
           <h2 className="fs-5">
-            {/* {tuit.postedBy && tuit.postedBy.username}@
-            {tuit.postedBy && tuit.postedBy.username} -{tuit.postedOn} */}
+            {tuit.postedBy && tuit.postedBy.username}@
+            {tuit.postedBy && tuit.postedBy.username}
           </h2>
           <div>
             {tuit.tuit}
