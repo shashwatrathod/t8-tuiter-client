@@ -2,13 +2,11 @@ import React, { useEffect, useState } from "react";
 import TuitStats from "./tuit-stats";
 import TuitImage from "./tuit-image";
 import TuitVideo from "./tuit-video";
-import TuitVersions from "./tuit-versions";
 import {HashRouter, Link, Route, Routes, useNavigate, useLocation, useParams} from "react-router-dom";
 
 const Tuit = ({ tuit, deleteTuit, likeTuit, dislikeTuit}) => {
   const navigate = useNavigate();
-  const tuit_id = tuit._id
-  const handleClick = () => {
+  const handleClick = (tuit_id) => {
     navigate(`/tuits/${tuit_id}/versions`)};
   return (
     <li className="p-2 ttr-tuit list-group-item d-flex rounded-0">
@@ -38,7 +36,7 @@ const Tuit = ({ tuit, deleteTuit, likeTuit, dislikeTuit}) => {
             {tuit?.youtube && <TuitVideo tuit={tuit} />}
             {tuit?.image && <TuitImage tuit={tuit} />}
             <i 
-              onClick={() => handleClick()}
+              onClick={() => handleClick(tuit._id)}
               className="far fa-pencil me-1 "></i>
           </div>
           {/* <div>
