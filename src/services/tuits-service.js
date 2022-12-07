@@ -30,3 +30,6 @@ export const deleteTuit = (tid) =>
 
 export const getVersions = (tid) =>
 api.get(`${TUITS_API}/${tid}/versions`).then((response) => response.data);
+
+export const editTuit = (tid) =>
+api.put(`${TUITS_API}/${tid}/edit`).then((response) => response.data);
