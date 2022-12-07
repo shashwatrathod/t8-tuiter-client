@@ -14,6 +14,7 @@
   } from "../services/tuits-service";
   import { createUser, deleteUser } from "../services/users-service";
 
+//tuit version is 1 when new tuit posted
   describe('test initial version', () => {
     const ripley = {
         firstName: "ellen",
@@ -38,27 +39,27 @@
         newUser = await createUser(ripley);
         userId = newUser._id;
         newTuit = await createTuit(userId, tuit);
-        console.log("in before", newUser,newTuit)
 
     });
 
     afterEach(async () => {
-        // return deleteTuit(tuit._id) && deleteUsersByUsername(ripley.username);
         while(userId) {
             return deleteTuit(newTuit._id);
         }
         await deleteUser(ripley._id);
-        // await deleteUsersByUsername(ripley.username);
     });
 
     test('tuit version is 1 when tuit is created', async () => {
         let tuitVersion = 1
         const tuitResponse = await findTuitById(newTuit._id);
         expect(tuitResponse.v).toEqual(tuitVersion);
+        expect(tuitResponse.tuit).toEqual(tuitText);
+        expect(tuitResponse.postedBy).toEqual(userId);
     });
 });
 
-describe('test version update', () => {
+// tuit version is updated after edit tuit action
+describe('test version update after user edits a tuit', () => {
     const ripley = {
         firstName: "ellen",
         lastName: "ripley",
@@ -82,7 +83,6 @@ describe('test version update', () => {
         newUser = await createUser(ripley);
         userId = newUser._id;
         newTuit = await createTuit(userId, tuit);
-        console.log("in before", newUser,newTuit)
 
     });
 
@@ -93,13 +93,16 @@ describe('test version update', () => {
         await deleteUser(ripley._id);
     });
 
-    test('tuit version is 2 when tuit is edited', async () => {
-        const newVersion = await editTuit(newTuit._id)
+    test('tuit version is 2 when original tuit is edited for the first time', async () => {
+        await editTuit(newTuit._id)
         const tuitResponse = await findTuitById(newTuit._id);
         expect(tuitResponse.v).toBe(2);
+        expect(tuitResponse.tuit).toEqual(tuitText);
+        expect(tuitResponse.postedBy).toEqual(userId);
     });
 });
 
+// get all versions returns all previous versions and the current tuit.
 describe('get All versions of tuits returns all the versions of the tuit', () => {
     const ripley = {
         firstName: "ellen",
@@ -133,14 +136,30 @@ describe('get All versions of tuits returns all the versions of the tuit', () =>
         await deleteUser(ripley._id);
     });
 
-    test('tuit version is 2 when tuit is edited', async () => {
+    test('total versions of tuit are 7 when original tuit is edited 6 times', async () => {
         let i = 6
+        var editedTuit;
         while ( i > 0) {
             await editTuit(newTuit._id)
             i=i-1
         }
+        const arr =new Set()
         // const newVersion = await editTuit(newTuit._id)
         const tuitResponse = await getVersions(newTuit._id);
         expect(Object.keys(tuitResponse).length).toBe(7);
+
+        for( const [key, value] of Object.entries(tuitResponse)) {
+            if(key === "currentTuitVersion"){        
+                arr.add(value._id)
+            }
+            else { 
+                arr.add(value.tid)
+            }
+        }
+        
+        expect(arr.size).toBe(1)
+        editedTuit = await findTuitById(newTuit._id)
+        expect(editedTuit.v).toBe(7)
+        
     });
 });
