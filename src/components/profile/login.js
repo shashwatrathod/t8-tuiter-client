@@ -1,9 +1,10 @@
 import {Link, useNavigate} from "react-router-dom";
-import {useEffect, useState} from "react";
+import { useContext, useEffect, useState } from "react";
 import * as service from "../../services/users-service";
 import * as authService from "../../services/auth-service";
 import React from "react";
 import { UserList } from "./user-list";
+import { UserContext } from "../../contexts/user-context";
 
 export const Login = () => {
   const [existingUsers, setExistingUsers] = useState([]);
@@ -12,6 +13,13 @@ export const Login = () => {
   const [newUser, setNewUser] = useState({});
   const [loginUser, setLoginUser] = useState({});
   const navigate = useNavigate();
+  const { login, signup, user } = useContext(UserContext);
+
+  // useEffect(() => {
+  //   if (user) {
+  //     navigate("/profile");
+  //   }
+  // }, [user, navigate]);
 
   const uuu = [
     {
@@ -35,22 +43,21 @@ export const Login = () => {
       setExistingUsers(users);
     });
 
-  const register = () =>
-    authService
-      .signup(newUser)
+  const registerUser = () =>
+    signup(newUser)
       .then(() => navigate("/profile"))
       .catch((e) => alert(e));
 
-  const login = () => {
+  const signinUser = () => {
     if (!loginUser?.username || !loginUser.password) return;
 
-    authService
-      .login(loginUser?.username, loginUser?.password)
-      .then(() => navigate("/profile"));
+    login(loginUser?.username, loginUser?.password).then(() => {
+      navigate("/profile");
+    });
   };
 
-
   useEffect(findAllUsers, []);
+
   return (
     <div>
       <h1>Register</h1>
@@ -71,7 +78,7 @@ export const Login = () => {
         placeholder="email"
         type="email"
       />
-      <button onClick={register} className="btn btn-primary mb-5">
+      <button onClick={registerUser} className="btn btn-primary mb-5">
         Register
       </button>
 
@@ -91,7 +98,7 @@ export const Login = () => {
         placeholder="password"
         type="password"
       />
-      <button onClick={login} className="btn btn-primary mb-5">
+      <button onClick={signinUser} className="btn btn-primary mb-5">
         Login
       </button>
 

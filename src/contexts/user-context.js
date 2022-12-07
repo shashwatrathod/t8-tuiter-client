@@ -6,12 +6,13 @@ export const UserContext = createContext();
 const UserContextProvier = (props) => {
   const [user, setUser] = useState(null);
 
+
   const login = (username, password) => {
     return authService
       .login(username, password)
       .then((res) => {
-        if (res.data) {
-          setUser(user);
+        if (res) {
+          setUser(res);
         }
       })
       .catch((err) => console.log(err.message));
@@ -21,8 +22,8 @@ const UserContextProvier = (props) => {
     return authService
       .signup(user)
       .then((res) => {
-        if (res.data) {
-          setUser(res.data);
+        if (res) {
+          setUser(res);
         }
       })
       .catch((err) => console.log(err.message));
