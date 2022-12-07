@@ -36,27 +36,21 @@ console.log("outside the function",allVersions)
             </div>
             <div>
                 {Object.keys(allVersions).map((key)=> {
-                    return <div key={key}>
-                        <div>
-                        tuit: {allVersions[key].tuit}
+                    return <div key={key} className="p-2 ttr-tuit list-group-item d-flex rounded-0">
+                        <div className="w-100 row fs-6">
+                            <div>
+                            {allVersions[key].tuit}
+                            </div>
+                            <div className="">
+                            version: {allVersions[key].v}
+                            </div>
+                            <div>
+                            posted on: {allVersions[key].editedOn}
+                            </div>     
                         </div>
-                        <div>
-                        version: {allVersions[key].v}
-                        </div>
-                        <div>
-                        edited on: {allVersions[key].editedOn}
-                        </div>                     
-                        </div>
+                                        
+                    </div>
                 })}
-            </div>
-            <div>
-            {allVersions.tuit}
-            </div>
-            <div>
-            {allVersions.v}
-            </div>
-            <div>
-            {allVersions.editedOn}
             </div>
         </div>
     )

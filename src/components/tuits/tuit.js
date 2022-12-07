@@ -35,14 +35,13 @@ const Tuit = ({ tuit, deleteTuit, likeTuit, dislikeTuit}) => {
             {tuit.tuit}
             {tuit?.youtube && <TuitVideo tuit={tuit} />}
             {tuit?.image && <TuitImage tuit={tuit} />}
-            <i 
+            {
+              tuit?.v >1 && <i 
               onClick={() => handleClick(tuit._id)}
               className="far fa-pencil me-1 "></i>
+            }
+            
           </div>
-          {/* <div>
-            <i className="far fa-pencil me-1"></i>
-              {tuit.stats.edits}
-          </div> */}
           <TuitStats tuit={tuit} likeTuit={likeTuit} dislikeTuit={dislikeTuit} />
 
         </div>
