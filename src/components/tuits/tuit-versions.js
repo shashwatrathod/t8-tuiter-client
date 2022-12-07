@@ -5,18 +5,7 @@ import {useParams} from "react-router-dom";
 const TuitVersions = () => {
   const [allVersions, getAllVersions] = useState([]);
   const {tid} = useParams();
-//   const findTuitVersions = async () =>{
-//     const versions = await service.getVersions(tid)
-//     return versions
-//   }
-//   findTuitVersions().then((res)=>console.log((res)));
-  
-//   useEffect(findTuitVersions, [tid]);
-// const [ video, setVideo ] = useState([]);
-// useEffect(async () => {
-//     await console.log(service.getVersions(tid)
-//       .then((matched) => setVideo(matched)));
-//   }, []);
+
 const findTuitVersions = async () => {
         const versions =   await service.getVersions(tid)
         getAllVersions(versions)
