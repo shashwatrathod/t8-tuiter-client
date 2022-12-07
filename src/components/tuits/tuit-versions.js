@@ -1,9 +1,8 @@
-import Tuits from "./tuit";
 import * as service from "../../services/tuits-service";
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 
-const TuitVersions = ({tuitVersion}) => {
+const TuitVersions = () => {
   const [allVersions, getAllVersions] = useState([]);
   const {tid} = useParams();
 //   const findTuitVersions = async () =>{
@@ -30,42 +29,26 @@ useEffect(() => {
 
 console.log("outside the function",allVersions)
   
-//   return(
-//     <div>
-//       <div>
-//         <h1>Tuit Versions</h1> 
-//       </div>
-//         {allVersions && allVersions.map((versions) => {
-//                 return (
-//                     <div>
-//                         {versions.v}
-//                     </div>
-//                 )
-//             })}
-//              <div>
-//         {/* <ul className="ttr-tuits list-group">
-//         {tuit.map &&
-//           tuit.map((tuit) => {
-//             return (
-//               <Tuit
-//                 key={tuit.tid}
-//                 findTuitVersions={findTuitVersions}
-//               />
-//             );
-//           })}
-//       </ul> */}
-//       {/* <Tuit tuits = {allVersions}/> */}
-//     </div>
-//     </div>
-//   );
     return(
         <div>
-            <p>The video and it's details will go here </p>
-            {/* {allVersions && allVersions.map((allVersions, i) => (
-            <div key={i}>
-                <div>{allVersions.i}</div>
+            <div>
+                <h1>Tuit Versions</h1> 
             </div>
-            ))} */}
+            <div>
+                {Object.keys(allVersions).map((key)=> {
+                    return <div key={key}>
+                        <div>
+                        tuit: {allVersions[key].tuit}
+                        </div>
+                        <div>
+                        version: {allVersions[key].v}
+                        </div>
+                        <div>
+                        edited on: {allVersions[key].editedOn}
+                        </div>                     
+                        </div>
+                })}
+            </div>
             <div>
             {allVersions.tuit}
             </div>
@@ -75,7 +58,6 @@ console.log("outside the function",allVersions)
             <div>
             {allVersions.editedOn}
             </div>
-        
         </div>
     )
 };

@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import TuitStats from "./tuit-stats";
 import TuitImage from "./tuit-image";
 import TuitVideo from "./tuit-video";
-import {HashRouter, Link, Route, Routes, useNavigate, useLocation, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 const Tuit = ({ tuit, deleteTuit, likeTuit, dislikeTuit}) => {
   const navigate = useNavigate();
