@@ -1,24 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Tuits from "../tuits";
 import { Link, useNavigate } from "react-router-dom";
 import * as authService from "../../services/auth-service";
+import { UserContext } from "../../contexts/user-context";
 
 const Profile = () => {
   const navigate = useNavigate();
-  const [profile, setProfile] = useState({});
+  // const [user, setProfile] = useState({});
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const user = await authService.profile();
-        setProfile(user);
-      } catch (err) {
-        navigate("/login");
-      }
-    };
-
-    fetchProfile();
-  }, [navigate]);
+    if (!user) {
+      navigate("/login");
+    }
+  }, [navigate, user]);
 
   const logout = () => {
     authService.logout().then(() => navigate("/login"));
@@ -28,7 +23,7 @@ const Profile = () => {
     <div className="ttr-profile">
       <div className="border border-bottom-0">
         <h4 className="p-2 mb-0 pb-0 fw-bolder">
-          @{profile.username}
+          @{user?.username}
           <i className="fa fa-badge-check text-primary"></i>
         </h4>
         <span className="ps-2">67.6K Tuits</span>
@@ -58,10 +53,10 @@ const Profile = () => {
 
         <div className="p-2">
           <h4 className="fw-bolder pb-0 mb-0">
-            {profile.firstName} {profile.lastName}
+            {user?.firstName} {user?.lastName}
             <i className="fa fa-badge-check text-primary"></i>
           </h4>
-          <h6 className="pt-0">@{profile.username}</h6>
+          <h6 className="pt-0">@{user?.username}</h6>
           <p className="pt-2">There's space for everybody. Sparkles</p>
           <p>
             <i className="far fa-location-dot me-2"></i>
@@ -99,11 +94,11 @@ const Profile = () => {
                 Likes
               </Link>
             </li>
-             <li className="nav-item">
-               <Link to="/profile/mentions"
-                     className="nav-link">
-                 User Mentions</Link>
-             </li>
+            <li className="nav-item">
+              <Link to="/profile/mentions" className="nav-link">
+                User Mentions
+              </Link>
+            </li>
           </ul>
         </div>
       </div>
