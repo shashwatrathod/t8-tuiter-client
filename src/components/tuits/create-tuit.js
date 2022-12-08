@@ -17,7 +17,7 @@ const CreateTuit = ({ initialContent = "", tuitOnClick }) => {
             onChange={(e) => setTuit(e.target.value)}
             placeholder="What's happening?"
             className="w-100 border-0"
-            value={tuit}
+            defaultValue={initialContent}
           ></textarea>
           <div className="row">
             <div className="col-10 ttr-font-size-150pc text-primary">

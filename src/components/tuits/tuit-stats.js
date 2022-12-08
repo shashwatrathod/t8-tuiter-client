@@ -3,11 +3,13 @@ import * as likesService from "../../services/likes-service";
 import * as dislikesService from "../../services/dislikes-service";
 import { UserContext } from "../../contexts/user-context";
 import clsx from "clsx";
+import { useNavigate } from "react-router-dom";
 
 const TuitStats = ({ likeTuit, tuit, dislikeTuit }) => {
   const [likedTuit, setLikedTuit] = useState(false);
   const [dislikedTuit, setDislikedTuit] = useState(false);
   const { user } = useContext(UserContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchLikesDislikes = () => {
@@ -62,7 +64,10 @@ const TuitStats = ({ likeTuit, tuit, dislikeTuit }) => {
         // Account for conditions where postedBy is populated and where postedBy is not populated
         (user?._id == tuit?.postedBy?._id || user?._id == tuit?.postedBy) && (
           <>
-            <div className="col ttr-tuit-stats-cursor">
+            <div
+              className="col ttr-tuit-stats-cursor"
+              onClick={() => navigate(`/profile/tuits/${tuit._id}/edit`)}
+            >
               <i className="fa fa-pencil me-1" aria-hidden="true"></i>
               Edit
             </div>

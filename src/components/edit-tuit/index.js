@@ -34,7 +34,7 @@ const EditTuit = () => {
   return (
     <>
       <div className="ttr-home">
-        <div className="border border-bottom-0">
+        <div className="border">
           <h4 className="fw-bold p-2">Edit Tuit</h4>
           {user && (
             <CreateTuit initialContent={originalTuit} tuitOnClick={editTuit} />
