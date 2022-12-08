@@ -6,15 +6,20 @@ const TuitVersions = () => {
   const [allVersions, getAllVersions] = useState([]);
   const {tid} = useParams();
 
-const findTuitVersions = async () => {
+// const findTuitVersions = async () => {
+//         const versions =   await service.getVersions(tid)
+//         getAllVersions(versions)
+//         console.log("inside the function",versions)
+// }
+  
+useEffect(() => {
+        const findTuitVersions = async () => {
         const versions =   await service.getVersions(tid)
         getAllVersions(versions)
         console.log("inside the function",versions)
 }
-  
-useEffect(() => {
         findTuitVersions();
-    }, []);
+    }, [tid]);
 
 console.log("outside the function",allVersions)
   
