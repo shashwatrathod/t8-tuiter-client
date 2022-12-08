@@ -1,6 +1,6 @@
 import axios from "axios";
 // const BASE_URL = process.env.REACT_APP_TUIT_SERVICE_URL;
-const BASE_URL = "http://localhost:4000/api"
+const BASE_URL = "http://localhost:4000/api" || process.env.REACT_APP_TUIT_SERVICE_URL;
 
 const AUTH_API = `${BASE_URL}/auth`;
 
