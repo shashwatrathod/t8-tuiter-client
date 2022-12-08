@@ -18,6 +18,7 @@ import Movies from "../movies";
 import MovieDetails from "../movies/details";
 import MyTuits from "../profile/my-tuits";
 import UserContextProvier from "../../contexts/user-context";
+import EditTuit from "../edit-tuit";
 
 function Tuiter() {
   return (
@@ -43,6 +44,7 @@ function Tuiter() {
                 <Route path="/lists" element={<Lists />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/profile/tuits" element={<MyTuits />} />
+                <Route path="/profile/tuits/:tid/edit" element={<EditTuit />} />
                 <Route path="/profile/edit" element={<EditProfile />} />
                 <Route path="/movies" element={<Movies />} />
                 <Route path="/movies/:imdbID" element={<MovieDetails />} />
