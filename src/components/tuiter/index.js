@@ -17,6 +17,7 @@ import {Login} from "../profile/login";
 import Movies from "../movies";
 import MovieDetails from "../movies/details";
 import MyTuits from "../profile/my-tuits";
+import TuitVersions from "../tuits/tuit-versions";
 import UserContextProvier from "../../contexts/user-context";
 
 function Tuiter() {
@@ -42,10 +43,11 @@ function Tuiter() {
                 <Route path="/bookmarks" element={<Bookmarks />} />
                 <Route path="/lists" element={<Lists />} />
                 <Route path="/profile" element={<Profile />} />
-                <Route path="/profile/tuits" element={<MyTuits />} />
+                <Route path="/profile/tuits/*" element={<MyTuits />} />
                 <Route path="/profile/edit" element={<EditProfile />} />
                 <Route path="/movies" element={<Movies />} />
                 <Route path="/movies/:imdbID" element={<MovieDetails />} />
+                <Route path="/tuits/:tid/versions" element={<TuitVersions/>} />
                 <Route path="/more" element={<More />} />
               </Routes>
             </div>
