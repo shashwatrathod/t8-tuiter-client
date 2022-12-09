@@ -3,7 +3,7 @@ import axios from "axios";
 //  process.env.REACT_APP_TUIT_SERVICE_URL ||
 //  "https://shash-tuiter.herokuapp.com/api";
 // const BASE_URL = "https://software-engineering-node-fa22.herokuapp.com/api";
- const BASE_URL = "http://localhost:4003/api";
+ const BASE_URL = "http://localhost:4000/api" | "http://localhost:4003/api";
 
 
 
