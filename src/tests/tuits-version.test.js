@@ -44,9 +44,11 @@
 
     afterEach(async () => {
         while(userId) {
-            return deleteTuit(newTuit._id);
+            return deleteTuit(newTuit._id) && deleteUser(newUser._id);
+            
         }
-        await deleteUser(ripley._id);
+
+        
     });
 
     test('tuit version is 1 when tuit is created', async () => {
@@ -88,9 +90,8 @@ describe('test version update after user edits a tuit', () => {
 
     afterEach(async () => {
         while(userId) {
-            return deleteTuit(newTuit._id);
+            return deleteTuit(newTuit._id) && deleteUser(newUser._id);
         }
-        await deleteUser(ripley._id);
     });
 
     test('tuit version is 2 when original tuit is edited for the first time', async () => {
@@ -131,9 +132,9 @@ describe('get All versions of tuits returns all the versions of the tuit', () =>
 
     afterEach(async () => {
         while(userId) {
-            return deleteTuit(newTuit._id);
+            return deleteTuit(newTuit._id) && deleteUser(newUser._id);
         }
-        await deleteUser(ripley._id);
+        
     });
 
     test('total versions of tuit are 7 when original tuit is edited 6 times', async () => {
@@ -144,7 +145,6 @@ describe('get All versions of tuits returns all the versions of the tuit', () =>
             i=i-1
         }
         const arr =new Set()
-        // const newVersion = await editTuit(newTuit._id)
         const tuitResponse = await getVersions(newTuit._id);
         expect(Object.keys(tuitResponse).length).toBe(7);
 
