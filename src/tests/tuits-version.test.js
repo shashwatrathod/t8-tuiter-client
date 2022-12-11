@@ -15,92 +15,88 @@
   import { createUser, deleteUser } from "../services/users-service";
 
 //tuit version is 1 when new tuit posted
-  describe('test initial version', () => {
+  describe("test initial version", () => {
     const ripley = {
-        firstName: "ellen",
-        lastName: "ripley",
-        username: 'ellenripley',
-        password: 'lv426',
-        email: 'ellenripley@aliens.com'
+      firstName: "ellen",
+      lastName: "ripley",
+      username: "ellenripley",
+      password: "lv426",
+      email: "ellenripley@aliens.com",
     };
-    const tuitText = 'random tuit to check creation';
+    const tuitText = "random tuit to check creation";
     const currDate = new Date("2022-11-02T11:48:48.360Z");
     let userId;
     let newUser;
     let newTuit;
     const tuit = {
-        tuit: tuitText,
-        postedOn: currDate,
-        postedBy: newUser,
-    }
-    
+      tuit: tuitText,
+      postedOn: currDate,
+      postedBy: newUser,
+    };
 
     beforeEach(async () => {
-        newUser = await createUser(ripley);
-        userId = newUser._id;
-        newTuit = await createTuit(userId, tuit);
-
+      newUser = await createUser(ripley);
+      userId = newUser._id;
+      newTuit = await createTuit(userId, tuit);
     });
 
     afterEach(async () => {
-        while(userId) {
-            return deleteTuit(newTuit._id);
-        }
-        await deleteUser(ripley._id);
+      while (userId) {
+        return deleteTuit(newTuit._id);
+      }
+      await deleteUser(ripley._id);
     });
 
-    test('tuit version is 1 when tuit is created', async () => {
-        let tuitVersion = 1
-        const tuitResponse = await findTuitById(newTuit._id);
-        expect(tuitResponse.v).toEqual(tuitVersion);
-        expect(tuitResponse.tuit).toEqual(tuitText);
-        expect(tuitResponse.postedBy).toEqual(userId);
+    test("tuit version is 1 when tuit is created", async () => {
+      let tuitVersion = 1;
+      const tuitResponse = await findTuitById(newTuit._id);
+      expect(tuitResponse.v).toEqual(tuitVersion);
+      expect(tuitResponse.tuit).toEqual(tuitText);
+      expect(tuitResponse.postedBy._id).toEqual(userId);
     });
-});
+  });
 
-// tuit version is updated after edit tuit action
-describe('test version update after user edits a tuit', () => {
+  // tuit version is updated after edit tuit action
+  describe("test version update after user edits a tuit", () => {
     const ripley = {
-        firstName: "ellen",
-        lastName: "ripley",
-        username: 'ellenripley',
-        password: 'lv426',
-        email: 'ellenripley@aliens.com'
+      firstName: "ellen",
+      lastName: "ripley",
+      username: "ellenripley",
+      password: "lv426",
+      email: "ellenripley@aliens.com",
     };
-    const tuitText = 'random tuit to check creation';
+    const tuitText = "random tuit to check creation";
     const currDate = new Date("2022-11-02T11:48:48.360Z");
     let userId;
     let newUser;
     let newTuit;
     const tuit = {
-        tuit: tuitText,
-        postedOn: currDate,
-        postedBy: newUser,
-    }
-    
+      tuit: tuitText,
+      postedOn: currDate,
+      postedBy: newUser,
+    };
 
     beforeEach(async () => {
-        newUser = await createUser(ripley);
-        userId = newUser._id;
-        newTuit = await createTuit(userId, tuit);
-
+      newUser = await createUser(ripley);
+      userId = newUser._id;
+      newTuit = await createTuit(userId, tuit);
     });
 
     afterEach(async () => {
-        while(userId) {
-            return deleteTuit(newTuit._id);
-        }
-        await deleteUser(ripley._id);
+      while (userId) {
+        return deleteTuit(newTuit._id);
+      }
+      await deleteUser(ripley._id);
     });
 
-    test('tuit version is 2 when original tuit is edited for the first time', async () => {
-        await editTuit(newTuit._id)
-        const tuitResponse = await findTuitById(newTuit._id);
-        expect(tuitResponse.v).toBe(2);
-        expect(tuitResponse.tuit).toEqual(tuitText);
-        expect(tuitResponse.postedBy).toEqual(userId);
+    test("tuit version is 2 when original tuit is edited for the first time", async () => {
+      await editTuit(newTuit._id);
+      const tuitResponse = await findTuitById(newTuit._id);
+      expect(tuitResponse.v).toBe(2);
+      expect(tuitResponse.tuit).toEqual(tuitText);
+      expect(tuitResponse.postedBy._id).toEqual(userId);
     });
-});
+  });
 
 // get all versions returns all previous versions and the current tuit.
 describe('get All versions of tuits returns all the versions of the tuit', () => {
