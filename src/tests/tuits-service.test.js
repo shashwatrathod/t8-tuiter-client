@@ -77,7 +77,10 @@ describe("test tuit service", () => {
     test("can retrieve a tuit using tuit id", async () => {
       const retrievedTuit = await findTuitById(createdTuit._id);
 
-      expect(retrievedTuit).toEqual(createdTuit);
+      expect(retrievedTuit.tuit).toEqual(createdTuit.tuit);
+      expect(retrievedTuit._id).toEqual(createdTuit._id);
+      expect(retrievedTuit.postedBy._id).toEqual(createdTuit.postedBy);
+      expect(retrievedTuit.postedOn).toEqual(createdTuit.postedOn);
     });
   });
 
