@@ -1,6 +1,7 @@
 import {
   createTuit,
   deleteTuit,
+  editTuit,
   findAllTuits,
   findTuitById,
 } from "../services/tuits-service";
@@ -105,6 +106,41 @@ describe("test tuit service", () => {
           allTuits.findIndex((tuit) => tuit._id === createdTuit._id)
         ).not.toBe(-1);
       });
+    });
+  });
+
+  describe("useer can edit a tuit", () => {
+    let createdTuit = null;
+
+    beforeAll(async () => {
+      createdTuit = await createTuit(author._id, {
+        tuit: "this is version 1 of the tuit",
+      });
+    });
+
+    afterAll(async () => deleteTuit(createdTuit._id));
+
+    test("any user can edit a tuit", async () => {
+      let editedTuitText = "this is version 2 of the tuit";
+
+      const retrievedOriginalTuit = await findTuitById(createdTuit._id);
+
+      // verify that original tuit's version is 1 before making any edits.
+      expect(retrievedOriginalTuit.v).toBe(1);
+
+      // verify that original tuit's tuit text is still the same
+      expect(retrievedOriginalTuit.tuit).toEqual(createdTuit.tuit);
+
+      const status = await editTuit(createdTuit._id, { tuit: editedTuitText });
+      console.log(status);
+
+      const retrievedEditedTuit = await findTuitById(createdTuit._id);
+
+      // verify that edited tuit's version is 2
+      expect(retrievedEditedTuit.v).toBe(2);
+
+      // verify that edited tuit's tuit text is correct
+      expect(retrievedEditedTuit.tuit).toEqual(editedTuitText);
     });
   });
 });
