@@ -1,6 +1,9 @@
 body {
     overflow-x: hidden;
+    color: #c51f5d;
+    background-color:#141d26;
 }
+
 
 .ttr-width-100-pc {
     width: 100%;
