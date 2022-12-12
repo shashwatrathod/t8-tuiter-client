@@ -5,8 +5,7 @@
 
 .ttr-navigation li,
 .ttr-navigation a {
-    border: 25%;
+    border: none;
     text-decoration: none;
-    color:  #c51f5d;
-    background-color:#1e3144;
+    color: black;
 }
