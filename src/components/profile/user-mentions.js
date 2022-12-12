@@ -1,13 +1,23 @@
+import { useEffect, useState } from "react";
+import * as service from "../../services/tuits-service";
+import Tuits from "../tuits";
+import * as mention from "../../services/usermentions-service";
 const UserMentions = () => {
 
-    return(
+  const [tuits, setTuits] = useState([]);
 
-        <div>
+    const findMyTuits = () =>
+      mention.findUserMentioned().then((tuits) => setTuits(tuits));
 
-            <h1>user mentions</h1>
+    useEffect(findMyTuits, []);
 
-        </div>
+    const deleteTuit = (tid) => service.deleteTuit(tid).then(findMyTuits);
 
+    return (
+    <div>
+       <h1>You were mentioned in these tweets </h1>
+      <Tuits tuits={tuits} deleteTuit={deleteTuit} refreshTuits={findMyTuits} />
+    </div>
     );
 
 };
