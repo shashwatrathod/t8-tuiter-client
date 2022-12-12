@@ -14,6 +14,8 @@ const EditTuit = () => {
   useEffect(() => {
     if (!user) navigate("/login"); // if the user is not logged in, we cannot let them edit this tuit
 
+    if (!tid) navigate(-1);
+
     tuitsService.findTuitById(tid).then((tuit) => {
       if (!tuit) navigate(-1);
 
