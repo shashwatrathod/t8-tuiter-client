@@ -19,6 +19,7 @@ import MyTuits from "../profile/my-tuits";
 import TuitVersions from "../tuits/tuit-versions";
 import UserContextProvier from "../../contexts/user-context";
 import EditTuit from "../edit-tuit";
+import UserMentions from "../profile/user-mentions";
 
 function Tuiter() {
   return (
@@ -43,6 +44,7 @@ function Tuiter() {
               <Route path="/lists" element={<Lists />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/profile/tuits" element={<MyTuits />} />
+              <Route path="/profile/mentions" element={<UserMentions />} />
               <Route path="/profile/tuits/:tid/edit" element={<EditTuit />} />
               <Route path="/profile/edit" element={<EditProfile />} />
               <Route path="/movies" element={<Movies />} />
