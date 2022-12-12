@@ -155,7 +155,6 @@ describe('get All versions of tuits returns all the versions of the tuit', () =>
         
         expect(arr.size).toBe(1)
         editedTuit = await findTuitById(newTuit._id)
-        expect(editedTuit.v).toBe(7)
-        
+        expect(editedTuit.v).toBe(7);
     });
 });
