@@ -19,33 +19,35 @@ const Tuit = ({ tuit, deleteTuit, likeTuit, dislikeTuit}) => {
       </div>
       <div className="w-100">
         <div className="row">
-          <div className="col">
-            <i
-              onClick={() => deleteTuit(tuit._id)}
-              className="fas fa-remove fa-2x fa-pull-right"
-            ></i>
+          <div className="col d-flex justify-content-between align-items-center">
+            <h2 className="fs-5 align-middle">
+              {tuit.postedBy && tuit.postedBy.username}@
+              {tuit.postedBy && tuit.postedBy.username}
+            </h2>
+            <div>
+              {tuit?.v > 1 && (
+                <i
+                  onClick={() => handleClick(tuit._id)}
+                  className="fa fa-pencil-square me-3 fa-2x ttr-tuit-stats-cursor"
+                ></i>
+              )}
+              <i
+                onClick={() => deleteTuit(tuit._id)}
+                className="fas fa-remove fa-2x ttr-tuit-stats-cursor"
+              ></i>
+            </div>
           </div>
-          
-          
-          <h2 className="fs-5">
-            {tuit.postedBy && tuit.postedBy.username}@
-            {tuit.postedBy && tuit.postedBy.username}
-          </h2>
           <div>
             {tuit.tuit}
             {tuit?.youtube && <TuitVideo tuit={tuit} />}
             {tuit?.image && <TuitImage tuit={tuit} />}
-            {
-              tuit?.v >1 && <i 
-              onClick={() => handleClick(tuit._id)}
-              className="far fa-pencil me-1 "></i>
-            }
-            
           </div>
-          <TuitStats tuit={tuit} likeTuit={likeTuit} dislikeTuit={dislikeTuit} />
-
+          <TuitStats
+            tuit={tuit}
+            likeTuit={likeTuit}
+            dislikeTuit={dislikeTuit}
+          />
         </div>
-
       </div>
     </li>
   );
