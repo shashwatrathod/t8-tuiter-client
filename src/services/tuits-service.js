@@ -1,8 +1,6 @@
 import axios from "axios";
 const BASE_URL =
- process.env.REACT_APP_TUIT_SERVICE_URL ||
- "http://localhost:4000/api";
-// const BASE_URL = "http://localhost:4000/api" || "http://localhost:4003/api";
+  process.env.REACT_APP_TUIT_SERVICE_URL || "http://localhost:4000/api";
 
 const TUITS_API = `${BASE_URL}/tuits`;
 const USERS_API = `${BASE_URL}/users`;
@@ -28,3 +26,9 @@ export const updateTuit = (tid, tuit) =>
 
 export const deleteTuit = (tid) =>
   api.delete(`${TUITS_API}/${tid}`).then((response) => response.data);
+
+export const getVersions = (tid) =>
+  api.get(`${TUITS_API}/${tid}/versions`).then((response) => response.data);
+
+export const editTuit = (tid, tuit) =>
+  api.put(`${TUITS_API}/${tid}/edit`, tuit).then((response) => response.data);
