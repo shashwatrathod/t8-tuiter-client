@@ -1,8 +1,7 @@
 import axios from "axios";
 const BASE_URL =
-  process.env.REACT_APP_TUIT_SERVICE_URL ||
-  // "https://shash-tuiter.herokuapp.com/api"||
-  "http://localhost:4000/api";
+  process.env.REACT_APP_TUIT_SERVICE_URL || "http://localhost:4000/api";
+  
 const TUITS_API = `${BASE_URL}/tuits`;
 const USERS_API = `${BASE_URL}/users`;
 
@@ -31,5 +30,5 @@ export const deleteTuit = (tid) =>
 export const getVersions = (tid) =>
   api.get(`${TUITS_API}/${tid}/versions`).then((response) => response.data);
 
-export const editTuit = (tid) =>
-  api.put(`${TUITS_API}/${tid}/edit`).then((response) => response.data);
+export const editTuit = (tid, tuit) =>
+  api.put(`${TUITS_API}/${tid}/edit`, tuit).then((response) => response.data);
