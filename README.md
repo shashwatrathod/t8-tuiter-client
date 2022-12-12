@@ -42,6 +42,13 @@ git clone https://github.com/shashwatrathod/t8-tuiter-client
 3. Currently, you don't need to follow the other user in order to mention them in a tuit. 
 4. In sanjanadabbiru's profile, navigate to the "Mentions" tab in order to see a list of all the tuits this user was mentioned in.
 
+## Technologies Used
+
+- React
+- JavaScript
+- Axios
+- Bootstrap
+
 ## Setting up environment variables
 
 1. Create a file called `.env` in the root level directory of this project.
