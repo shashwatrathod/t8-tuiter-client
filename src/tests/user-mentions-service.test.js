@@ -89,7 +89,7 @@ describe('test user mentioned by another user', () => {
     beforeEach(async () => {
         newUser = await createUser(ripley);
         userId = newUser._id;
-        newUser = await createUser(pipley);
+        newUser2 = await createUser(pipley);
         userId2 = newUser2._id;
         newTuit = await createTuit(userId, tuit);
         
@@ -164,7 +164,7 @@ describe('test user can be mentioned only if they have registered on app', () =>
     });
 
     afterEach(async () => {
-        while(userId && userId2) {
+        while(userId) {
             await deleteUser(userId);
             // await deleteUser(userId2)
             return deleteTuit(newTuit._id) && deleteTuit(newTuit2._id);
@@ -173,13 +173,7 @@ describe('test user can be mentioned only if they have registered on app', () =>
 
     test('user mention works only when mentioned user is registered on app', async () => {
         const tuitResponse = await findUserMentioned(userId2);
-        const arr =new Set()
-        for( const [value] of Object.entries(tuitResponse)) {
-            arr.add(value.tuit)
-        }
-        for (const mention in arr.values){
-            expect(mention).toBeNull()
-        }
+        expect(tuitResponse).toBe(undefined)
             
     });
 });
