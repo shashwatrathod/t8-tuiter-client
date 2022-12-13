@@ -1,10 +1,17 @@
 .ttr-tuits .ttr-tuit-avatar-logo {
     width: 48px;
+
 }
 
 .ttr-tuits .ttr-tuit-image-overlay {
     left: 10px;
 }
+
+.ttr-tuit{
+color:  white;
+    background-color:#1d262f;
+    border-color:#172233;
+    }
 
 .ttr-tuits .ttr-responsive-video::after {
     display: block;
@@ -18,4 +25,11 @@
 
 .ttr-tuit-stats-cursor {
     cursor: pointer;
+}
+
+
+
+li{
+color:  #c51f5d;
+    background-color:#1e3144;
 }
