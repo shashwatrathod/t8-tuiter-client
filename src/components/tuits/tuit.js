@@ -2,6 +2,8 @@ import React from "react";
 import TuitStats from "./tuit-stats";
 import TuitImage from "./tuit-image";
 import TuitVideo from "./tuit-video";
+import './tuits.css';
+
 import {useNavigate} from "react-router-dom";
 
 const Tuit = ({ tuit, deleteTuit, likeTuit, dislikeTuit}) => {
@@ -9,7 +11,7 @@ const Tuit = ({ tuit, deleteTuit, likeTuit, dislikeTuit}) => {
   const handleClick = (tuit_id) => {
     navigate(`/tuits/${tuit_id}/versions`)};
   return (
-    <li className="p-2 ttr-tuit list-group-item d-flex rounded-0">
+    <li className="p-2 ttr-tuit list-group-item d-flex rounded-0" >
       <div className="pe-2">
         {/* {
           tuit.postedBy &&

@@ -21,7 +21,7 @@ function Tuits({ tuits = [], deleteTuit, refreshTuits}) {
 
   return (
     <div>
-      <ul className="ttr-tuits list-group">
+      <ul className="ttr-tuits list-group" >
         {tuits.map &&
           tuits.map((tuit) => {
             return (
