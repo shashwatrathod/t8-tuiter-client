@@ -1,9 +1,17 @@
 import Tuits from "../components/tuits";
 import { screen, render } from "@testing-library/react";
 import { HashRouter } from "react-router-dom";
-import { findAllTuits } from "../services/tuits-service";
+import * as usermention from "../services/usermentions-service";
 import axios from "axios";
+import { UserContext } from "../contexts/user-context";
+import * as router from "react-router";
 
+import UserMentions from "../components/profile/user-mentions";
+const navigate = jest.fn();
+
+beforeEach(() => {
+  jest.spyOn(router, "useNavigate").mockImplementation(() => navigate);
+});
 const MOCKED_USERS = [
   {
     username: "alice",
@@ -24,55 +32,30 @@ const MOCKED_TUITS = [
   {
     _id: "11111",
     postedBy: MOCKED_USERS[0],
-    tuit: "alice's tuit",
+    tuit: "alice's tuit @alice",
   },
   {
     _id: "11112",
     postedBy: MOCKED_USERS[1],
-    tuit: "bob's tuit",
+    tuit: "bob's tuit @alice",
   },
   {
     _id: "11113",
     postedBy: MOCKED_USERS[2],
-    tuit: "charlie's tuit",
+    tuit: "charlie's tuit @alice",
   },
 ];
 
 test("tuit list renders static tuit array", () => {
   render(
+  <UserContext.Provider value={{ user: MOCKED_USERS[0] }}>
     <HashRouter>
       <Tuits tuits={MOCKED_TUITS} />
     </HashRouter>
+  </UserContext.Provider>
   );
-  const linkElement = screen.getByText(/alice's tuit/i);
+  const linkElement = screen.getByText(/alice's tuit @alice/i);
   expect(linkElement).toBeInTheDocument();
 });
 
-test("tuit list renders async", async () => {
-  const tuits = await findAllTuits();
-  render(
-    <HashRouter>
-      <Tuits tuits={tuits} />
-    </HashRouter>
-  );
-  const linkElement = screen.getByText(/Hello, world/i);
-  expect(linkElement).toBeInTheDocument();
-});
 
-test("tuit list renders mocked", async () => {
-  const mock = jest.spyOn(axios, "get");
-  mock.mockImplementation(() =>
-    Promise.resolve({ data: { tuits: MOCKED_TUITS } })
-  );
-  const response = await findAllTuits();
-  const tuits = response.tuits;
-
-  render(
-    <HashRouter>
-      <Tuits tuits={tuits} />
-    </HashRouter>
-  );
-  const linkElement = screen.getByText(/alice's tuit/i);
-  expect(linkElement).toBeInTheDocument();
-  mock.mockRestore();
-});
